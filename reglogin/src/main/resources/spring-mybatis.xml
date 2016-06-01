@@ -58,10 +58,10 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations"
-			value="classpath:com/aifortune/reglogin/mapping/*.xml" />
+			value="classpath:reglogin/mapping/*.xml" />
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.aifortune.reglogin.dao" />
+		<property name="basePackage" value="reglogin.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
@@ -101,7 +101,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 	</tx:advice>
 	<aop:config>
 		<aop:pointcut id="transactionPointcut"
-			expression="execution(* com.aifortune.aifortune.service..*Impl.*(..))" />
+			expression="execution(* reglogin.service..*Impl.*(..))" />
 		<aop:advisor pointcut-ref="transactionPointcut"
 			advice-ref="transactionAdvice" />
 	</aop:config>
@@ -115,7 +115,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 		scope="prototype">
 		<property name="patterns">
 			<list>
-				<value>com.aifortune.reglogin.service.*</value>
+				<value>reglogin.service.*</value>
 			</list>
 		</property>
 	</bean>
