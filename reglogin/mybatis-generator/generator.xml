@@ -5,11 +5,11 @@ config_1_0.dtd">
 <generatorConfiguration>
 	<!-- oracle lib location -->
 	<classPathEntry location="/home/lhh/.m2/repository/mysql/mysql-connector-java/5.1.38/mysql-connector-java-5.1.38.jar" />
-	<context id="DB2Tables" targetRuntime="MyBatis3">
+	<context id="MysqlTables" targetRuntime="MyBatis3">
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" />
 		</commentGenerator>
-		<!-- oracle URL、username、password -->
+		<!-- mysql URL、username、password -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://192.168.54.251:3306/reglogin" userId="root" password="123456">
 		</jdbcConnection>

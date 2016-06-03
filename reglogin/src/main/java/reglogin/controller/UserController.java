@@ -1,10 +1,13 @@
 package reglogin.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import reglogin.model.User;
 import reglogin.service.impl.UserServiceImpl;
@@ -12,33 +15,29 @@ import reglogin.service.impl.UserServiceImpl;
 @Controller
 public class UserController {
 
-	private UserServiceImpl userServer;
-
+	private UserServiceImpl userService;
+	
 	private Logger LOG = Logger.getLogger(getClass());
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String toLogin() {
+	@RequestMapping(value="/", method = RequestMethod.GET)
+	public String welcome() {
+		LOG.info("welcome method");
 		return "login";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(String uname, String upass, ModelMap model) {
-		String v_result = "login";
-		try {
-			LOG.info("User name is: " + uname + ", passwd is: " + upass);
-			//TODO:Here upass should be MD5 or sha1 with SALT
-			User user = userServer.getUserByNameAndPw(uname, upass);
-			if (user != null)
-				return "index";
-			else
-				return "login";
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.put("errMsg", "服务器有异常!");
-		}
-
-		return "login";
+	@RequestMapping(value="/login", method = RequestMethod.POST)
+	public String login(@RequestParam("name") String name, @RequestParam("passwd") String passwd,
+			HttpServletRequest request) {
+		String message = "Hello";
+		request.getSession().setAttribute("LOGIN_NAME", name);
+		LOG.info("name: " + name + ",password " + passwd);
+		User user = userService.getUserByNameAndPw(name, passwd);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("message", message);
+		mav.setViewName("index");
+		if (user != null)
+			return "redirect:index";
+		else
+			return "login";
 	}
-
 }

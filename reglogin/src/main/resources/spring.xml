@@ -14,10 +14,20 @@
 
 	<!-- 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 
 		两个bean,是spring MVC为@Controllers分发请求所必须的 -->
+	<mvc:annotation-driven /> <context:annotation-config />
 	<mvc:default-servlet-handler />
 
+	<bean id="defaultRequestMappingHandlerAdapter"
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+
+	</bean>
+
 	<mvc:interceptors>
-		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+		<mvc:interceptor>
+			<!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->
+			<mvc:mapping path="/**" />
+			<bean class="reglogin.interceptor.LoginInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 
 	<bean id="localeResolver"
