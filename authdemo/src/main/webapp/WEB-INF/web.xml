@@ -65,11 +65,11 @@
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
 		<!-- 拦截所有/* 的请求,交给DispatcherServlet处理,性能最好 -->
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
 	<!-- 首页 -->
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>

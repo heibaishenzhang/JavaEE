@@ -2,6 +2,7 @@ package com.aifortune.authdemo.service.impl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,8 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	private UserMapper userMapper;// 注入dao
+	
+	private  final Logger LOG = Logger.getLogger(getClass());
 
 	public void addUser(User user) {
 		// TODO Auto-generated method stub
@@ -33,6 +36,7 @@ public class UserServiceImpl implements IUserService {
 
 	public User getUserByNameAndPw(String username, String password) {
 		// TODO Auto-generated method stub
+		LOG.info("======>1  name: " + username + " ,password" + password);
 		return userMapper.selectByUserAndPw(username, password);
 	}
 

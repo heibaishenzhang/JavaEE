@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.aifortune.authdemo.UserMapper">
+<mapper namespace="com.aifortune.authdemo.dao.UserMapper">
 	<resultMap id="BaseResultMap" type="com.aifortune.authdemo.model.User">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="username" property="username" jdbcType="VARCHAR" />
@@ -15,15 +15,15 @@
 		parameterType="java.lang.Long">
 		select
 		<include refid="Base_Column_List" />
-		from user
+		from user  
 		where id = #{id,jdbcType=BIGINT}
 	</select>
 
-	<select id="selectByUserAndPw" resultMap="BaseResultMap">
+	<select id="selectByUserAndPw" resultMap="BaseResultMap"  parameterType="com.aifortune.authdemo.model.User">
 		select
 		<include refid="Base_Column_List" />
 		from user
-		where username = #{username,jdbcType=VARCHAR} and #{password,
+		where username = #{username,jdbcType=VARCHAR} and password=#{password,
 		jdbcType=VARCHAR}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
